@@ -1,7 +1,6 @@
 package com.lapoule.fastparse.sql
 import fastparse.*
 import NoWhitespace.*
-import com.lapoule.fastparse.sql.SqlCommons.{Identifier, SimpleIdentifier, identifier, ws}
 
 object SelectSqlParser {
   import SqlValues._
