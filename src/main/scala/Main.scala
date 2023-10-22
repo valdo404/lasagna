@@ -3,29 +3,39 @@ package com.lapoule.fastparse.sql
 import fastparse.*
 import NoWhitespace.*
 object Main {
-
   import SelectSqlParser._
 
+
+  /**
+   * Note: an extensive SQL parser would check if request is valid:
+   * - Semantical check on namespaces and referenced data
+   * - Semantical cross-check on field selection part and field-filtering part
+   *
+   * Also it would allow standard function calls
+   * Also it would allow (inner|left|right|outer) joins
+   * Also it would allow (correlated) (named) subqueries
+   * Also it would allow unions
+   */
   def main(args: Array[String]): Unit = {
-    val Parsed.Success(result, _: Int) = parse("SELECT A.a AS truc, b,c,  d FROM table AS A WHERE a AND \"dude4\"=b OR c=3", selectDml)
+    val result = sql"""SELECT   A.a AS truc, b,c,  d FROM table AS A WHERE a     AND     "dude4"=b    OR c=3"""
     println(result)
 
-    val Parsed.Success(result2, _: Int) = parse("SELECT a, b,c,  d FROM table WHERE a=\"a\" AND (b=1 OR c=3)", selectDml)
+    val result2 = sql"""SELECT a, B.b,c, d FROM table as A WHERE a="a" AND (b=1 OR c=3)"""
     println(result2)
 
-    val Parsed.Success(result3, _: Int) = parse("SELECT a FROM table WHERE (a=\"a\" OR b=2)", selectDml)
+    val result3 = sql"""SELECT a FROM table AS C WHERE (a="a" OR   b=2)"""
     println(result3)
 
-    val Parsed.Success(result4, _: Int) = parse("SELECT a FROM table WHERE a=+1E+1", selectDml)
+    val result4 = sql"SELECT a FROM table WHERE a=+1E+1"
     println(result4)
 
-    val Parsed.Success(result5, _: Int) = parse("SELECT a FROM table WHERE a=10.12", selectDml)
+    val result5 = sql"SELECT a FROM table WHERE a= 10.12"
     println(result5)
 
-    val Parsed.Success(result6, _: Int) = parse("SELECT a FROM table", selectDml)
+    val result6 = sql"SELECT a   FROM table"
     println(result6)
 
-    val Parsed.Success(result7, _: Int) = parse("SELECT a", selectDml)
+    val result7 = sql"SELECT a   "
     println(result7)
   }
 }
