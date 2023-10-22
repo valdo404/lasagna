@@ -6,51 +6,7 @@ object SqlExpressions {
   import SqlCommons.*
   import SqlValues.*
   import fastparse.NoWhitespace.*
-  sealed trait FilteringCombinator
-  case object And extends FilteringCombinator {
-    override def toString: String = "AND"
-  }
-  case object Or extends FilteringCombinator {
-    override def toString: String = "OR"
-  }
-  sealed trait Operator
-
-  case object Equal extends Operator {
-    override def toString: String = "="
-  }
-
-  case object NotEqual extends Operator {
-    override def toString: String = "!="
-  }
-
-  case object Greater extends Operator {
-    override def toString: String = ">"
-  }
-
-  case object Lower extends Operator {
-    override def toString: String = "<"
-  }
-
-  sealed trait Expr
-
-  sealed trait Simple extends Expr
-
-  case class Unary(atom: Atom) extends Simple {
-    override def toString: String = s"$atom"
-  }
-
-  case class Binary(left: Atom, operator: Operator, right: Atom) extends Simple {
-    override def toString: String = s"$left$operator$right"
-  }
-
-  case class ChainedExpr(left: Expr, filteringCombinator: FilteringCombinator, right: Expr) extends Expr {
-    override def toString: String = s"$left $filteringCombinator $right"
-  }
-
-  case class GroupedExpr(contents: Expr) extends Expr {
-    override def toString: String = s"($contents)"
-  }
-
+  import com.lapoule.lasagna.sql.Model._
 
   def operator[$: P]: P[Operator] = P("=".!).map(str => Equal)
 

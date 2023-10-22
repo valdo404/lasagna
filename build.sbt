@@ -8,9 +8,16 @@ lazy val root = (project in file("."))
       version := "0.1",
       scalaVersion := "3.3.1"
   )
-  .aggregate(parser)
+  .aggregate(parser, sqlModel)
+
+lazy val sqlModel = (project in file("lasagna-sql-model"))
+  .settings(
+        name := "lasagna-sql-model",
+        idePackagePrefix := Some("com.lapoule.lasagna.sql"),
+  )
 
 lazy val parser = (project in file("lasagna-parser"))
+  .dependsOn(sqlModel)
   .settings(
       name := "lasagna-parser",
       idePackagePrefix := Some("com.lapoule.lasagna.parser"),

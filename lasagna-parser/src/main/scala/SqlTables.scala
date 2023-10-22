@@ -1,20 +1,11 @@
 package com.lapoule.lasagna.parser
 
-import SqlCommons.{Identifier, SimpleIdentifier, identifier, ws}
+import SqlCommons.{identifier, ws}
 
 object SqlTables {
+  import com.lapoule.lasagna.sql.Model._
   import fastparse.*
   import NoWhitespace.*
-
-  trait DataSelectionExpr
-
-  case class SimpleTable(identifier: Identifier) extends DataSelectionExpr {
-    override def toString: String = identifier.toString
-  }
-
-  case class NamedTable(table: SimpleTable, asClause: SimpleIdentifier) extends DataSelectionExpr {
-    override def toString: String = s"$table AS $asClause"
-  }
 
   private def from[$: P]: P[Unit] = P(IgnoreCase("FROM") ~ ws)
 

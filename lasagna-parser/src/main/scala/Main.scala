@@ -6,6 +6,8 @@ import scopt.OParser
 
 
 object Main {
+  import com.lapoule.lasagna.sql.Model._
+
   import SelectSqlParser.*
   case class Config(sql: String = "")
 

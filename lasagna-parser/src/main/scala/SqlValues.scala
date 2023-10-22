@@ -1,33 +1,11 @@
 package com.lapoule.lasagna.parser
 
-import com.lapoule.lasagna.parser.SqlCommons.Atom
 import fastparse.*
 import fastparse.NoWhitespace.*
 
 object SqlValues {
-  sealed trait Value extends Atom
-
-  case class StringValue(str: String) extends Value {
-    override def toString: String = s"\"$str\""
-  }
-
-  case class IntValue(int: Int) extends Value {
-    override def toString: String = int.toString
-  }
-
-  case class FloatValue(float: Float) extends Value {
-    override def toString: String = float.toString
-  }
-
-  trait Sign
-
-  case object Plus extends Sign {
-    override def toString: String = "+"
-  }
-
-  case object Minus extends Sign {
-    override def toString: String = "-"
-  }
+  import com.lapoule.lasagna.sql.Model._
+ 
 
   def minus[$: P]: P[Minus.type] = {
     P("-".!).map(str => Minus)

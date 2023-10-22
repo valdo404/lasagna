@@ -1,3 +1,5 @@
+package com.lapoule.lasagna.parser
+
 import com.lapoule.lasagna.parser.SelectSqlParser.StringSelectContext
 import org.scalatest.funsuite.AnyFunSuite
 

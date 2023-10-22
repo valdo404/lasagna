@@ -3,29 +3,11 @@ package com.lapoule.lasagna.parser
 import fastparse.*
 
 object SqlColumns {
+  import com.lapoule.lasagna.sql.Model._
+
   import SqlCommons.*
   import SqlValues.*
   import fastparse.NoWhitespace.*
-
-  sealed trait ColumnExpr
-
-  case object Star extends ColumnExpr {
-    override def toString: String = "*"
-  }
-
-  case class NamedColumnExp(columnExpr: SimpleColumn, identifier: SimpleIdentifier) extends ColumnExpr {
-    override def toString: String = s"$columnExpr AS $identifier"
-  }
-
-  trait SimpleColumn extends ColumnExpr
-
-  case class Column(identifier: Identifier) extends SimpleColumn {
-    override def toString: String = s"$identifier"
-  }
-
-  case class ValueColumn(value: Value) extends SimpleColumn {
-    override def toString: String = s"$value"
-  }
 
   def starExpr[$: P]: P[Star.type] = P("*").map(_ => Star)
 
