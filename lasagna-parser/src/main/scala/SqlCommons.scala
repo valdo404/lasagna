@@ -1,8 +1,7 @@
-package com.lapoule.fastparse.sql
+package com.lapoule.lasagna.parser
 
-import fastparse.{CharIn, P}
+import fastparse.NoWhitespace.*
 import fastparse.*
-import NoWhitespace.*
 
 object SqlCommons {
   def ws[$: P]: P[Unit] = P(" ".rep(1))
@@ -26,4 +25,5 @@ object SqlCommons {
     map { case (namespace: SimpleIdentifier, identifier: SimpleIdentifier) => NamespacedIdentifier(namespace, identifier) }
 
   def identifier[$: P]: P[Identifier] = P(namespacedIdentifier | simpleIdentifier)
+  
 }

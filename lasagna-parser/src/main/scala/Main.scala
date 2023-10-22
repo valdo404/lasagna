@@ -1,18 +1,18 @@
-package com.lapoule.fastparse.sql
+package com.lapoule.lasagna.parser
 
 import fastparse.*
-import NoWhitespace.*
+import fastparse.NoWhitespace.*
 import scopt.OParser
 
 
 object Main {
-  import SelectSqlParser._
+  import SelectSqlParser.*
   case class Config(sql: String = "")
 
   val builder = OParser.builder[Config]
 
   val parser = {
-    import builder._
+    import builder.*
     OParser.sequence(
       programName("sql-cli"),
       head("sql-cli", "1.0"),
@@ -49,13 +49,12 @@ object Main {
      *
      * Also it would allow (correlated) (named) subqueries
      *
-     * INTERSET / EXCEPT / MINUS (sets)
+     * INTERSECT / EXCEPT / MINUS (sets)
      * PARTITION BY (for windowing)
      * Also it would allow window functions using OVER, LAG, ROW_NUMBER, RANK, DENSE_RANK, NTILE, LEAD, FIRST_VALUE, LAST_VALUE, etc
      * * Also it would allow CUBE, ROLLUP, GROUPING, GROUPING_IDS
      * WITH ... AS, WITH RECURSIVE (ctes)
      * Comments (-- blabla)
-     *
      *
      * USE INDEX, FORCE INDEX, IGNORE INDEX (index handling)
      * JSON_EXTRACT / JSON_OBJECT (for json data types)

@@ -1,12 +1,11 @@
-package com.lapoule.fastparse.sql
+package com.lapoule.lasagna.parser
 
 import fastparse.*
 
 object SqlColumns {
-  import fastparse.NoWhitespace.*
-
   import SqlCommons.*
   import SqlValues.*
+  import fastparse.NoWhitespace.*
 
   sealed trait ColumnExpr
 

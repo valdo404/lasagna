@@ -1,7 +1,4 @@
-package com.lapoule.fastparse.sql
-
-import com.lapoule.fastparse.sql.SelectSqlParser.StringSelectContext
-import org.scalatest.funsuite.AnyFunSuite
+import com.lapoule.lasagna.parser.SelectSqlParser.StringSelectContext
 import org.scalatest.funsuite.AnyFunSuite
 
 class SimpleParseCheck extends AnyFunSuite {

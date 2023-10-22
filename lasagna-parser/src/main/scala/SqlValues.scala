@@ -1,8 +1,8 @@
-package com.lapoule.fastparse.sql
+package com.lapoule.lasagna.parser
 
+import com.lapoule.lasagna.parser.SqlCommons.Atom
 import fastparse.*
-import NoWhitespace.*
-import com.lapoule.fastparse.sql.SqlCommons.Atom
+import fastparse.NoWhitespace.*
 
 object SqlValues {
   sealed trait Value extends Atom

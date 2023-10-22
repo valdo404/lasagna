@@ -1,9 +1,8 @@
-package com.lapoule.fastparse.sql
+package com.lapoule.lasagna.parser
 
 import SqlCommons.{Identifier, SimpleIdentifier, identifier, ws}
 
 object SqlTables {
-
   import fastparse.*
   import NoWhitespace.*
 

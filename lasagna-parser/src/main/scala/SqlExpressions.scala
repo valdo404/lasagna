@@ -1,11 +1,10 @@
-package com.lapoule.fastparse.sql
-
+package com.lapoule.lasagna.parser
 
 import fastparse.*
 
 object SqlExpressions {
-  import SqlCommons._
-  import SqlValues._
+  import SqlCommons.*
+  import SqlValues.*
   import fastparse.NoWhitespace.*
   sealed trait FilteringCombinator
   case object And extends FilteringCombinator {
@@ -54,6 +53,7 @@ object SqlExpressions {
 
 
   def operator[$: P]: P[Operator] = P("=".!).map(str => Equal)
+
   def and[$: P]: P[And.type] = P(IgnoreCase("AND")).map(_ => And)
   def or[$: P]: P[Or.type] = P(IgnoreCase("OR")).map(_ => Or)
 
@@ -75,5 +75,5 @@ object SqlExpressions {
   def groupedExpr[$: P]: P[GroupedExpr] = P("(" ~ combinedExpr ~ ")").map(filter => GroupedExpr(filter))
 
   def combinedExpr[$: P]: P[Expr] = P(groupedExpr | chainedExpr | simpleBinaryExpr | simpleUnaryExpr)
- 
+
  }
