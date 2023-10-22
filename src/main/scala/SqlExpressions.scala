@@ -54,8 +54,8 @@ object SqlExpressions {
 
 
   def operator[$: P]: P[Operator] = P("=".!).map(str => Equal)
-  def and[$: P]: P[And.type] = P("AND").map(_ => And)
-  def or[$: P]: P[Or.type] = P("OR").map(_ => Or)
+  def and[$: P]: P[And.type] = P(IgnoreCase("AND")).map(_ => And)
+  def or[$: P]: P[Or.type] = P(IgnoreCase("OR")).map(_ => Or)
 
   def atom[$: P]: P[Atom] = P(identifier | value)
 

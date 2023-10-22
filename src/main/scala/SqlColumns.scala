@@ -32,7 +32,7 @@ object SqlColumns {
 
   def simpleColumn[$: P]: P[SimpleColumn] = P(identifier).map(id => Column(id))
 
-  def namedColumnExp[$: P]: P[NamedColumnExp] = P(simpleColumn ~ ws ~ "AS" ~ ws ~ identifier).
+  def namedColumnExp[$: P]: P[NamedColumnExp] = P(simpleColumn ~ ws ~ IgnoreCase("AS") ~ ws ~ identifier).
     map { case (column: SimpleColumn, identifier: SimpleIdentifier) => NamedColumnExp(columnExpr = column, identifier = identifier) }
 
   def sqlComma[$: P]: P[Unit] = P("," ~ ws.rep(0).?)

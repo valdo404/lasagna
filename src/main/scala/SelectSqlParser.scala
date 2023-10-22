@@ -10,7 +10,7 @@ object SelectSqlParser {
   import SqlExpressions._
   import SqlTables._
 
-  def where[$: P]: P[Unit] = P("WHERE" ~ ws)
+  def where[$: P]: P[Unit] = P(IgnoreCase("WHERE") ~ ws)
 
   def whereExp[$: P]: P[Expr] = P(where ~ combinedExpr ~ ws.?)
 
@@ -18,7 +18,7 @@ object SelectSqlParser {
     override def toString: String = s"SELECT ${columns.mkString(",")}${tableSpec.map(spec => s" FROM $spec").getOrElse("")}${filteringExpr.map(expr => s" WHERE ${expr}").getOrElse("")}"
   }
 
-  private def select[$: P]: P[Unit] = P( "SELECT" ~ ws )
+  private def select[$: P]: P[Unit] = P( IgnoreCase("SELECT") ~ ws )
 
   private def selectExpr[$: P]: P[Seq[ColumnExpr]] = P(select ~ columnExpr ~ ws.?)
 
