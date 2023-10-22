@@ -61,7 +61,7 @@ object SqlExpressions {
 
   def filteringCombinator[$: P]: P[FilteringCombinator] = P(ws ~ (and | or) ~ ws)
 
-  def simpleBinaryExpr[$: P]: P[Binary] = P(atom ~ operator ~ atom)
+  def simpleBinaryExpr[$: P]: P[Binary] = P(atom ~ ws.? ~ operator ~ ws.? ~ atom)
     .map { case (left, operator, right) => Binary(left = left, operator = operator, right = right) }
 
   def simpleUnaryExpr[$: P]: P[Unary] = P(atom)
