@@ -1,7 +1,8 @@
 The plan of lasagna is to build an data toolkit that is able to do:
 
 Batching SQL
-- Big data querying on both spark SQL and bigquery, allowing last SQL constructs on both engines
+- Big data querying on both spark SQL and bigquery, allowing last SQL constructs on both engines, and avoiding vendor lockin
+- Inject custom generated data at development time, in order to ease testing
 - Static analyis on SQL queries, identifying problems before executing them, and assessing execution plans 
 - Build a dynamical DAG suitable for execution for common Schedulers like airflow, but not only. 
 - Build integrated data quality checks, pushing data to Data Quality Check system 
@@ -10,7 +11,8 @@ Batching SQL
 - Provide analysis using LLM systems, and advise some refactorings when required.
 
 Streaming
-- Integrate with beam but also with ksql, allowing streaming sql constructs
+- Integrate with beam but also with ksql, allowing streaming sql constructs, and avoiding vendor lockin
+- Inject custom generated data at development time, in order to ease testing
 - Static analysis on streaming SQL queries, identifying problems, and previsualising queries on data streams
 - Build a Dynamical Streaming DAG, by leveraging beam / kafka streams sinks and sources
 - Build integrated data quality check for streaming
